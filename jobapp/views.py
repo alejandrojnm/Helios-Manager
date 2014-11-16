@@ -17,7 +17,7 @@ from django.conf import settings
 @csrf_exempt
 def showJob(request):
 
-    jobs_request = requests.get('http://10.10.10.34:5801/jobs/'+request.POST['id']+'/status')
+    jobs_request = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/jobs/'+request.POST['id']+'/status')
     job_json = jobs_request.json()
 
     jobsList = []

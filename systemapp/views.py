@@ -15,16 +15,16 @@ from django.conf import settings
 # Create your views here.
 @login_required
 def dashboard(request):
-    allhost = requests.get('http://10.10.10.34:5801/hosts/')
+    allhost = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/')
     allh = allhost.json()
 
-    alljobs = requests.get('http://10.10.10.34:5801/jobs/')
+    alljobs = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/jobs/')
     allj = alljobs.json()
 
 
     listHost = []
     for host in allh:
-        tempo = requests.get('http://10.10.10.34:5801/hosts/'+host+'/status')
+        tempo = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
         listHost.append(tempo.json())
 
     jobs = []

@@ -96,4 +96,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 #Helios Version
-HELIOS_VERSION = "0.1"
+HELIOS_VERSION = '0.1'
+HELIOS_HOST_MASTER = '10.10.10.34:5801'
