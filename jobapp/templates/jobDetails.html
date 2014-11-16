@@ -11,14 +11,19 @@
     </thead>
     <tbody>
     {% for job in jobsList %}
-        <tr{% if job.state == 'EXITED' %} class="alert-danger"{% endif %}>
+        <tr class="cursor-pointer {% if job.state == 'EXITED' %} alert-danger"{% endif %} data-container="body"
+            title="Ports" data-toggle="popover" data-html="true"
+            data-content="{% for port in job.ports %}<strong>{{ port.service }}</strong><br>{{ port.internalport }}=>{{ port.externalport }}<br>{% endfor %}">
             <td>{{ job.hostname }}</td>
             <td>{{ job.name|truncatechars:20 }}</td>
             <td>{{ job.containerid|truncatechars:20 }}</td>
-            <td>{{ job.goal }}</td>
-            <td>{{ job.throttled }}</td>
-            <td>{{ job.state }}{% ifequal job.state 'RUNNING' %}<div class="host-status-up job-status"></div>{% else %}<div class="host-status-down job-status"></div>{% endifequal %}</td>
+            <td>{{ job.goal|lower }}</td>
+            <td>{{ job.throttled|lower }}</td>
+            <td>{{ job.state|lower }}{% ifequal job.state 'RUNNING' %}
+                <div class="host-status-up job-status"></div>{% else %}
+                <div class="host-status-down job-status"></div>{% endifequal %}</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+<script src="{{ STATIC_URL }}js/helios.js"></script>

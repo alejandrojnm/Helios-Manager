@@ -10,7 +10,7 @@ $('.jobs').click(function (e) {
     */
     var btn = $(this)
     var id = btn.data('id');
-
+    $('.modal-body').html('');
     $('.modal-body').load('/job/show/', {id: id});
     $('#job').modal('toggle')
 

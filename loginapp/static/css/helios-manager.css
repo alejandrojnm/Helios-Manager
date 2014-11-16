@@ -1,7 +1,7 @@
 body{
     margin-top: 70px;
     font-family: 'Avenir Next LT Pro Condensed';
-    font-size: 17px;
+    font-size: 16px;
 }
 
 /*Nav Bar custom for helios manager*/
@@ -44,24 +44,24 @@ body{
 }
 
 .navbar-helios .navbar-toggle {
-    border-color: #ddd
+    border-color: #555555
 }
 
 .navbar-helios .navbar-toggle:hover, .navbar-helios .navbar-toggle:focus {
-    background-color: #ddd
+    background-color: #555555
 }
 
 .navbar-helios .navbar-toggle .icon-bar {
-    background-color: #888
+    background-color: #555555
 }
 
 .navbar-helios .navbar-collapse, .navbar-helios .navbar-form {
-    border-color: #e7e7e7
+    border-color: #555555
 }
 
 .navbar-helios .navbar-nav > .open > a, .navbar-helios .navbar-nav > .open > a:hover, .navbar-helios .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #e7e7e7
+    color: #fff;
+    background-color: #555555
 }
 /*end nav bar*/
 
@@ -142,3 +142,9 @@ a:focus {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px
 }
+
+/*custom pointer*/
+.cursor-pointer {
+    cursor:pointer;
+}
+/**/
