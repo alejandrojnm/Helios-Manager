@@ -1,0 +1,24 @@
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Host</th>
+        <th>Name</th>
+        <th>Container Id</th>
+        <th>Goal</th>
+        <th>Throttled</th>
+        <th>State</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for job in jobsList %}
+        <tr{% if job.state == 'EXITED' %} class="alert-danger"{% endif %}>
+            <td>{{ job.hostname }}</td>
+            <td>{{ job.name|truncatechars:20 }}</td>
+            <td>{{ job.containerid|truncatechars:20 }}</td>
+            <td>{{ job.goal }}</td>
+            <td>{{ job.throttled }}</td>
+            <td>{{ job.state }}{% ifequal job.state 'RUNNING' %}<div class="host-status-up job-status"></div>{% else %}<div class="host-status-down job-status"></div>{% endifequal %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

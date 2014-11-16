@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Helios {Manager} | beta {{ version }}</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrapValidator.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/helios-manager.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}css/login.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+
+    <form id="login-form" class="form-signin" role="form" action="{% url 'loginauth' %}">{% csrf_token %}
+        <h2 class="form-signin-heading"><img src="{{ STATIC_URL }}img/logo.png" alt=""/></h2>
+
+        <div id="errors" class="alert alert-warning hide" style="margin-bottom: 10px"></div>
+        <div class="form-group">
+            <input type="text" name="user" class="form-control" placeholder="Username" required autofocus>
+        </div>
+        <div class="form-group">
+            <input type="password" name="passwd" class="form-control" placeholder="Password" required>
+        </div>
+        {% comment %}<label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>{% endcomment %}
+        <button class="btn btn-default btn-primary btn-block" type="submit">Login</button><br>
+        <div id="msg" class="alert alert-info hide"></div>
+    </form>
+
+</div>
+<!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ STATIC_URL }}js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrapValidator.min.js"></script>
+<script src="{{ STATIC_URL }}js/login.js"></script>
+</body>
+</html>

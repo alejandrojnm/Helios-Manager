@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Helios {Manager}</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/jquery.circliful.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/helios-manager.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-helios navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-6">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}img/logo.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa fa-hdd-o"></i> Host</a></li>
+                <li><a href="#"><i class="fa fa-list"></i> Jobs</a></li>
+                <li><a href="#"><i class="fa fa-calendar"></i> Schedule</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <h4 class="page-header-helios">Host List</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ip</th>
+                    <th>Uptime</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                 {% for hosts in listHost %}
+                    <tr{% if hosts.status == 'DOWN' %} class="alert-danger"{% endif %}>
+                        <td>{{ hosts.agentInfo.name }}</td>
+                        <td>ip</td>
+                        <td>{{ hosts.agentInfo.uptime }}</td>
+                        <td>{{ hosts.status|lower }}<div class="host-status-{{ hosts.status|lower }}"></div></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-7">
+            <h4 id="details-host" class="page-header-helios">Details</h4>
+
+            <div class="pull-left cpu">
+                <div id="cpu" data-dimension="217" data-text="35%" data-info="CPU" data-width="12"
+                     data-fontsize="38" data-percent="35" data-fgcolor="#373737" data-bgcolor="#F3645B"></div>
+            </div>
+            <div class="pull-left ram">
+                <div id="ram" data-dimension="217" data-text="49%" data-info="RAM" data-width="12"
+                     data-fontsize="38" data-total="1024" data-part="500" data-fgcolor="#373737" data-bgcolor="#4D5D95"></div>
+            </div>
+            <div class="pull-left avg">
+                <div id="avg" data-dimension="217" data-text="50%" data-info="AVG" data-width="12"
+                     data-fontsize="38" data-percent="50.5" data-fgcolor="#373737" data-bgcolor="#49ABD9"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="page-header-helios">Jobs</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Version</th>
+                    <th>Port</th>
+                </tr>
+                </thead>
+                <tbody>
+                 {% for job in listJobs %}
+                     <tr>
+                        <td><a href="#" class="jobs" data-id="{{ job.id }}">{{ job.id|truncatechars:20 }}</a></td>
+                        <td>{{ job.name }}</td>
+                        <td>{{ job.version }}</td>
+                        <td>{{ job.ports }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h4 class="page-header-helios">Last Images</h4>
+        </div>
+    </div>
+</div>
+<!--
+Modal to show Jobs
+-->
+<div class="modal fade" id="job" tabindex="-1" role="dialog" aria-labelledby="jobs" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Details of Job</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+End Modal to show Jobs
+-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ STATIC_URL }}js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.circliful.min.js"></script>
+<script src="{{ STATIC_URL }}js/jobs.js"></script>
+<script>
+    $( document ).ready(function() {
+        $('#cpu').circliful();
+        $('#ram').circliful();
+        $('#avg').circliful();
+        $('#hdd').circliful();
+    });
+</script>
+</body>
+</html>

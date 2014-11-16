@@ -1,0 +1,144 @@
+body{
+    margin-top: 70px;
+    font-family: 'Avenir Next LT Pro Condensed';
+    font-size: 17px;
+}
+
+/*Nav Bar custom for helios manager*/
+.navbar-helios {
+    background-color: #373737;
+    border-bottom: solid 4px #F3645B;
+}
+
+.navbar-helios .navbar-brand img {
+    /*color: #ffffff*/
+    margin-top: -13px;
+}
+
+.navbar-helios .navbar-brand:hover, .navbar-helios .navbar-brand:focus {
+    color: #ffffff;
+    background-color: transparent
+}
+
+.navbar-helios .navbar-text {
+    color: #ffffff;
+}
+
+.navbar-helios .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-helios .navbar-nav > li > a:hover, .navbar-helios .navbar-nav > li > a:focus {
+    color: #ffffff;
+    background-color: #555555;
+}
+
+.navbar-helios .navbar-nav > .active > a, .navbar-helios .navbar-nav > .active > a:hover, .navbar-helios .navbar-nav > .active > a:focus {
+    color: #ffff;
+    background-color: #F3645B
+}
+
+.navbar-helios .navbar-nav > .disabled > a, .navbar-helios .navbar-nav > .disabled > a:hover, .navbar-helios .navbar-nav > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent
+}
+
+.navbar-helios .navbar-toggle {
+    border-color: #ddd
+}
+
+.navbar-helios .navbar-toggle:hover, .navbar-helios .navbar-toggle:focus {
+    background-color: #ddd
+}
+
+.navbar-helios .navbar-toggle .icon-bar {
+    background-color: #888
+}
+
+.navbar-helios .navbar-collapse, .navbar-helios .navbar-form {
+    border-color: #e7e7e7
+}
+
+.navbar-helios .navbar-nav > .open > a, .navbar-helios .navbar-nav > .open > a:hover, .navbar-helios .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #e7e7e7
+}
+/*end nav bar*/
+
+/* page header helios*/
+.page-header-helios {
+    padding-bottom: 9px;
+    margin: 0px 0 0px;
+    border-bottom: 2px solid #373737;
+    color: #373737;
+    font-family: 'Avenir Next LT Pro Heavy Condensed';
+    font-size: 20px;
+}
+/**/
+
+/*status of host*/
+.host-status-up {
+    background-color: #060;
+    width: 11px;
+    height: 11px;
+    margin-top: -19px;
+    border-radius: 6px;
+    position: absolute;
+    margin-left: 38px;
+}
+.host-status-down {
+    background-color: #8C0000;
+    width: 11px;
+    height: 11px;
+    margin-top: -19px;
+    border-radius: 6px;
+    position: absolute;
+    margin-left: 38px;
+}
+
+.job-status {
+    margin-left: 70px;
+}
+
+/**/
+
+/*color font donut dashboard*/
+.cpu {
+    color: #F3645B;
+}
+.ram {
+    color: #4D5D95;
+}
+.avg {
+    color: #49ABD9;
+}
+/**/
+
+/*custom modal windows*/
+.modal-content {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border: none;
+    border-radius: 0px;
+    outline: medium none;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+}
+/**/
+
+/*custom link*/
+a {
+    color: #333;
+    text-decoration: none
+}
+
+a:hover, a:focus {
+    color: #333;
+    text-decoration: none
+}
+
+a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px
+}

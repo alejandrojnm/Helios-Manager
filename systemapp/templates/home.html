@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ip</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hosts in listHost %}
+                <tr>
+                    <td>{{ hosts.agentInfo.name }}</td>
+                    <td>10.10.10.1</td>
+                    <td>{{ hosts.status|lower }}<div class="host-status-{{ hosts.status|lower }}"></div></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+</body>
+</html>
