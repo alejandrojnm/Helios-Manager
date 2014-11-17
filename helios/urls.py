@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^login/', 'loginapp.views.loginauth', name='loginauth'),
     url(r'^system/', include('systemapp.urls')),
     url(r'^job/', include('jobapp.urls')),
+    url(r'^host/', include('hostapp.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 )

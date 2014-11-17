@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'systemapp',
     'loginapp',
     'jobapp',
+    'hostapp',
 )
 
 MIDDLEWARE_CLASSES = (

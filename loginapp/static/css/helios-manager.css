@@ -71,8 +71,9 @@ body{
     margin: 0px 0 0px;
     border-bottom: 2px solid #373737;
     color: #373737;
-    font-family: 'Avenir Next LT Pro Heavy Condensed';
+    font-family: 'Avenir Next LT Pro Regular';
     font-size: 20px;
+    font-weight: bold;
 }
 /**/
 
@@ -146,5 +147,17 @@ a:focus {
 /*custom pointer*/
 .cursor-pointer {
     cursor:pointer;
+}
+/**/
+
+/*custom popover title*/
+.popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 18px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+    font-family:'Avenir Next LT Pro Demi';
 }
 /**/
