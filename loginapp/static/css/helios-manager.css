@@ -101,6 +101,11 @@ body{
     margin-left: 70px;
 }
 
+.hostpick {
+    border-top: 2px solid #4b575f;
+    border-bottom: 2px solid #4b575f;
+}
+
 /**/
 
 /*color font donut dashboard*/

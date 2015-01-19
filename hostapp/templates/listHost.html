@@ -1,11 +1,51 @@
 {% extends 'base.html' %}
 {% block container %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h4 class="page-header-helios">Host List</h4>
-        </div>
-        <div class="col-md-4">
-            <h4 class="page-header-helios">Host Details</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ip</th>
+                    <th>Jobs</th>
+                    <th>Arch</th>
+                    <th>Cpu</th>
+                    <th>Avg</th>
+                    <th>Memory</th>
+                    <th>Memory Free</th>
+                    <th>Swap</th>
+                    <th>Swap Free</th>
+                    <th>Uptime</th>
+                    <th>Helios</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hosts in listHost %}
+                    <tr class="hostList cursor-pointer {% if hosts.status == 'DOWN' %}alert-danger{% endif %}" data-host="{{ hosts.hostInfo.hostname }}">
+                        <td>{{ hosts.agentInfo.name }}</td>
+                        <td>ip</td>
+                        <td>{{ hosts.jobs|length }}</td>
+                        <td>{{ hosts.hostInfo.architecture }}</td>
+                        <td>{{ hosts.hostInfo.cpus }}</td>
+                        <td>{{ hosts.hostInfo.loadAvg }}</td>
+                        <td>{{ hosts.hostInfo.memoryTotalBytes|filesizeformat }}</td>
+                        <td>{{ hosts.hostInfo.memoryFreeBytes|filesizeformat }}</td>
+                        <td>{{ hosts.hostInfo.swapTotalBytes|filesizeformat }}</td>
+                        <td>{{ hosts.hostInfo.swapFreeBytes|filesizeformat }}</td>
+                        <td>{{ hosts.agentInfo.uptime }}</td>
+                        <td>{{ hosts.agentInfo.version }}</td>
+                        <td>{{ hosts.status|lower }}
+                        <div class="host-status-{{ hosts.status|lower }}"></div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+{% endblock %}
+{% block extrajs %}
+    <script src="{{ STATIC_URL }}js/host.js"></script>
 {% endblock %}

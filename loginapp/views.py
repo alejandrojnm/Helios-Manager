@@ -16,7 +16,7 @@ from django.conf import settings
 def login_helios(request):
 
     data = {
-        'version': settings.HELIOS_VERSION,
+        'version': settings.HELIOS_MANAGER_VERSION,
     }
 
     return render_to_response('login.html', data, RequestContext(request))

@@ -26,7 +26,7 @@ def list_host(request):
         listHost.append(tempo.json())
 
     data = {
-        #'jobsList': jobsList,
+        'listHost': listHost,
     }
 
     return render_to_response('listHost.html', data, RequestContext(request))

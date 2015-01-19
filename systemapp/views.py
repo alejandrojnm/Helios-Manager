@@ -43,6 +43,6 @@ def dashboard(request):
         'listHost': listHost,
 
         'listJobs': jobs,
-        'version': settings.HELIOS_VERSION,
+        'version': settings.HELIOS_MANAGER_VERSION,
     }
     return render_to_response('dashboard.html', data, RequestContext(request))
