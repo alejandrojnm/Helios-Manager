@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load systemtags %}
 {% block container %}
     <div class="row">
         <div class="col-lg-5">
@@ -17,7 +18,7 @@
                     <tr{% if hosts.status == 'DOWN' %} class="alert-danger"{% endif %}>
                         <td>{{ hosts.agentInfo.name }}</td>
                         <td>ip</td>
-                        <td>{{ hosts.agentInfo.uptime }}</td>
+                        <td>{{ hosts.agentInfo.uptime|humanDuration }}</td>
                         <td>{{ hosts.status|lower }}
                         <div class="host-status-{{ hosts.status|lower }}"></div>
                         </td>

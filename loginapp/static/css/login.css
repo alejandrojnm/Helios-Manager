@@ -36,7 +36,6 @@ body {
     color: #fff;
     background-color: #F3645B;
     border-color: #d16259;
-    font-family:'Avenir Next LT Pro Demi';
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {

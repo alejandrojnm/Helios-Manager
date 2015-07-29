@@ -1,48 +1,65 @@
 {% extends 'base.html' %}
+{% load systemtags %}
 {% block container %}
     <div class="row">
         <div class="col-md-12">
-            <h4 class="page-header-helios">Host List</h4>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Ip</th>
-                    <th>Jobs</th>
-                    <th>Arch</th>
-                    <th>Cpu</th>
-                    <th>Avg</th>
-                    <th>Memory</th>
-                    <th>Memory Free</th>
-                    <th>Swap</th>
-                    <th>Swap Free</th>
-                    <th>Uptime</th>
-                    <th>Helios</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for hosts in listHost %}
-                    <tr class="hostList cursor-pointer {% if hosts.status == 'DOWN' %}alert-danger{% endif %}" data-host="{{ hosts.hostInfo.hostname }}">
-                        <td>{{ hosts.agentInfo.name }}</td>
-                        <td>ip</td>
-                        <td>{{ hosts.jobs|length }}</td>
-                        <td>{{ hosts.hostInfo.architecture }}</td>
-                        <td>{{ hosts.hostInfo.cpus }}</td>
-                        <td>{{ hosts.hostInfo.loadAvg }}</td>
-                        <td>{{ hosts.hostInfo.memoryTotalBytes|filesizeformat }}</td>
-                        <td>{{ hosts.hostInfo.memoryFreeBytes|filesizeformat }}</td>
-                        <td>{{ hosts.hostInfo.swapTotalBytes|filesizeformat }}</td>
-                        <td>{{ hosts.hostInfo.swapFreeBytes|filesizeformat }}</td>
-                        <td>{{ hosts.agentInfo.uptime }}</td>
-                        <td>{{ hosts.agentInfo.version }}</td>
-                        <td>{{ hosts.status|lower }}
-                        <div class="host-status-{{ hosts.status|lower }}"></div>
-                        </td>
-                    </tr>
+        <a href="#" class="btn btn-danger pull-right"><span class="fa fa-filter"></span> Filter</a>
+            <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Host List</h4>
+            <div class="well well-sm hidden">filter</div>
+            <div class="row">
+              {% for hosts in listHost %}
+                <div class="col-xs-6 col-md-2">
+                <a href="#" class="helios-thumbnail">
+                  <img src="{{ STATIC_URL }}img/debian.png" alt="debian">
+                    <div class="caption">
+                    <h4>{{ hosts.hostInfo.hostname }}<div class="host-status-list-{{ hosts.status|lower }}"></div></h4>
+                  </div>
+                </a>
+              </div>
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
+{#            <table class="table table-striped">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th>Name</th>#}
+{#                    <th>Ip</th>#}
+{#                    <th>Jobs</th>#}
+{#                    <th>Arch</th>#}
+{#                    <th>Cpu</th>#}
+{#                    <th>Avg</th>#}
+{#                    <th>Memory</th>#}
+{#                    <th>Memory Free</th>#}
+{#                    <th>Swap</th>#}
+{#                    <th>Swap Free</th>#}
+{#                    <th>Uptime</th>#}
+{#                    <th>Helios</th>#}
+{#                    <th>Docker</th>#}
+{#                    <th>Status</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                {% for hosts in listHost %}#}
+{#                    <tr class="hostList cursor-pointer {% if hosts.status == 'DOWN' %}alert-danger{% endif %}" data-host="{{ hosts.hostInfo.hostname }}">#}
+{#                        <td>{{ hosts.agentInfo.name }}</td>#}
+{#                        <td>ip</td>#}
+{#                        <td>{{ hosts.jobs|length }}</td>#}
+{#                        <td>{{ hosts.hostInfo.architecture }}</td>#}
+{#                        <td>{{ hosts.hostInfo.cpus }}</td>#}
+{#                        <td>{{ hosts.hostInfo.loadAvg }}</td>#}
+{#                        <td>{{ hosts.hostInfo.memoryTotalBytes|filesizeformat }}</td>#}
+{#                        <td>{{ hosts.hostInfo.memoryFreeBytes|filesizeformat }}</td>#}
+{#                        <td>{{ hosts.hostInfo.swapTotalBytes|filesizeformat }}</td>#}
+{#                        <td>{{ hosts.hostInfo.swapFreeBytes|filesizeformat }}</td>#}
+{#                        <td>{{ hosts.agentInfo.uptime|humanDuration }}</td>#}
+{#                        <td>{{ hosts.agentInfo.version }}</td>#}
+{#                        <td>{{ hosts.hostInfo.dockerVersion.version }}</td>#}
+{#                        <td>{{ hosts.status|lower }}#}
+{#                        <div class="host-status-{{ hosts.status|lower }}"></div>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
         </div>
     </div>
 {% endblock %}

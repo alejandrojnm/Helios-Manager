@@ -1,6 +1,7 @@
 body{
     margin-top: 70px;
-    font-family: 'Avenir Next LT Pro Condensed';
+    /*font-family: 'Avenir Next LT Pro Condensed';*/
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
 }
 
@@ -71,9 +72,17 @@ body{
     margin: 0px 0 0px;
     border-bottom: 2px solid #373737;
     color: #373737;
-    font-family: 'Avenir Next LT Pro Regular';
+    font-family: 'Roboto-light';
     font-size: 20px;
     font-weight: bold;
+}
+
+.margin-bottom-helios {
+    margin-bottom: 15px;
+}
+
+.margin-top-helios {
+    margin-top: 15px;
 }
 /**/
 
@@ -95,6 +104,26 @@ body{
     border-radius: 6px;
     position: absolute;
     margin-left: 38px;
+}
+
+.host-status-list-up {
+    background-color: #060;
+    width: 11px;
+    height: 11px;
+    margin-top: -17px;
+    border-radius: 6px;
+    position: absolute;
+    margin-left: 134px;
+}
+
+.host-status-list-down {
+    background-color: #8C0000;
+    width: 11px;
+    height: 11px;
+    margin-top: -17px;
+    border-radius: 6px;
+    position: absolute;
+    margin-left: 134px;
 }
 
 .job-status {
@@ -163,6 +192,27 @@ a:focus {
     background-color: #f7f7f7;
     border-bottom: 1px solid #ebebeb;
     border-radius: 5px 5px 0 0;
-    font-family:'Avenir Next LT Pro Demi';
+    font-family:'Roboto-light';
+}
+/**/
+
+/*custon hover thumbnail*/
+
+.helios-thumbnail {
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1.42857;
+    background-color: #FFF;
+    border: 2px solid #373737;
+    border-radius: 4px;
+    transition: border 0.2s ease-in-out 0s;
+}
+
+.helios-thumbnail .caption {
+    padding-left: 5px;
+}
+
+a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
+    border-color: #F3645B;
 }
 /**/
