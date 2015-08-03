@@ -13,7 +13,7 @@
     {% for job in jobsList %}
         <tr class="cursor-pointer {% if job.state == 'EXITED' %} alert-danger"{% endif %} data-container="body"
             title="Ports" data-toggle="popover" data-html="true"
-            data-content="{% for port in job.ports %}<strong>{{ port.service }}</strong><br>{{ port.internalport }}=>{{ port.externalport }}<br>{% endfor %}">
+            data-content="{% for port in job.ports %}<strong>{{ port.service }}</strong><br>{{ port.externalport }}:{{ port.internalport }}<br>{% endfor %}">
             <td>{{ job.hostname }}</td>
             <td>{{ job.name|truncatechars:20 }}</td>
             <td>{{ job.containerid|truncatechars:20 }}</td>

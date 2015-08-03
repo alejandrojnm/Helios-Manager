@@ -3,4 +3,5 @@
  */
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover({trigger: 'hover', 'placement': 'bottom'});
+    $('[data-toggle="tooltip"]').tooltip();
 });

@@ -1,7 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 
-
+#TODO : make some imprube
 def humanduration(value):
     """
     Filter milisec to human time
@@ -16,7 +16,7 @@ def humanduration(value):
         return "%i Sec" % (time / 1000)
 
     # min
-    if time / 1000 < 60:
+    if time / 1000 / 60 < 60:
         return "%i Min" % (time / 1000 / 60)
 
     # hours
