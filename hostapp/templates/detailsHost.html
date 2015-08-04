@@ -84,36 +84,7 @@
                 <!-- Default panel contents -->
                 <div class="panel-heading">Jobs</div>
                 <!-- Table -->
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Image</th>
-                        <th>Container</th>
-                        <th>Ports</th>
-                        <th>State</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for job in jobsList %}
-                        <tr>
-                            <td>{{ job.name|truncatechars:25 }}</td>
-                            <td>{{ job.image }}</td>
-                            <td>{{ job.containerid|truncatechars:20 }}</td>
-                            <td>[{{ job.ports.0.externalport }}:{{ job.ports.0.internalport }}]</td>
-                            <td>{{ job.state|lower }}</td>
-                            <td>
-                                <a class="btn btn-default" data-toggle="tooltip" title="{% ifequal job.state 'RUNNING' %}Undeploy Job{% else %}Deploy Job{% endifequal %}"><span class="fa fa-{% ifequal job.state 'RUNNING' %}stop{% else %}play{% endifequal %}"></span> </a>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-center">There is no jobs running in this server, like run one</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div id="detailsJobs"></div>
             </div>
         </div>
     </div>
@@ -122,6 +93,16 @@
     <script src="{{ STATIC_URL }}js/host.js"></script>
     <script src="{{ STATIC_URL }}js/helios.js"></script>
     <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+    <script>
+    $(document).ready( function(){
+        refreshJobs();
+    });
+
+    function refreshJobs() {
+        $('#detailsJobs').load('{% url 'detailsJob' details_host.hostInfo.hostname %}');
+        setTimeout(refreshJobs, 3000); // you could choose not to continue on failure...
+    }
+    </script>
     <script type="text/javascript">
             $(function () {
                 $(document).ready(function () {
@@ -136,9 +117,6 @@
                         chart: {
                             type: 'line',
                             animation: Highcharts.svg, // don't animate in old IE
-{#                            borderColor: '#a1a1a1',#}
-{#                            borderWidth: 1,#}
-{#                            borderRadius: 3,#}
                             events: {
                                 load: function () {
 
@@ -174,7 +152,7 @@
                                 value: 0,
                                 width: 1,
                                 color: '#F3645B',
-{#                                lineColor: '#92A8CD',#}
+                                lineColor: '#92A8CD',
                             }]
                         },
                         tooltip: {
@@ -229,9 +207,6 @@
                         chart: {
                             type: 'line',
                             animation: Highcharts.svg, // don't animate in old IE
-{#                            borderColor: '#a1a1a1',#}
-{#                            borderWidth: 1,#}
-{#                            borderRadius: 3,#}
                             events: {
                                 load: function () {
 
@@ -267,7 +242,7 @@
                                 value: 0,
                                 width: 1,
                                 color: '#F3645B',
-{#                                lineColor: '#92A8CD',#}
+                                lineColor: '#92A8CD',
                             }]
                         },
                         tooltip: {

@@ -5,4 +5,5 @@ urlpatterns = patterns('jobapp',
     # Examples:
     #url(r'^show/(?P<id>[\w.,/:\,/_\-]+)/$', 'views.showJob', name='showJob'),
     url(r'^show/$', 'views.showJob', name='showJob'),
+    url(r'^details/(?P<host>[\w.,/_\-]+)/$', 'views.detailsJob', name='detailsJob'),
 )

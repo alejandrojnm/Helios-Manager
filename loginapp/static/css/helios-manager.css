@@ -245,8 +245,17 @@ a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
 }
 /**/
 
+.table-helios {
+    margin-bottom: 0px;
+}
+
 .table > tbody > tr > td {
     vertical-align: middle;
 }
 
 /**/
+
+/**/
+.footer {
+    color: #c0c0c0;
+}

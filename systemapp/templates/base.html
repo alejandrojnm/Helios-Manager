@@ -51,7 +51,7 @@
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="{% url 'logoutauth' %}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,8 +62,8 @@
 {% block container %}{% endblock %}
 <div class="row">
     <div class="col-md-12">
-        <hr>
-        <div class="pull-right"><h6>HELIOS-MANAGER - {% now "Y" %}</h6></div>
+        <hr class="helios-hr">
+        <div class="pull-right footer"><h6>HELIOS-MANAGER - {% now "Y" %} (rev.2e9d1ca)</h6></div>
     </div>
 </div>
 </div>

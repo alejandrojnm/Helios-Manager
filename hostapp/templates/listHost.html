@@ -25,7 +25,7 @@
                         </a>
                     </div>
                 {% if forloop.counter|divisibleby:6 %}</div>
-                    <hr class="helios-hr">
+                    {% if not forloop.last %}<hr class="helios-hr">{% endif %}
                     <div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}
             {% endfor %}
