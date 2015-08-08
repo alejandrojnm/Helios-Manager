@@ -40,7 +40,7 @@
                 <li {% if request.path == path or path in request.path %}class="active"{% endif %}><a href="{{ path }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 {% url 'listHost' as path %}
                 <li {% if request.path == path or path in request.path %}class="active"{% endif %}><a href="{{ path }}"><i class="fa fa-hdd-o"></i> Host</a></li>
-                <li><a href="#"><i class="fa fa-list"></i> Jobs</a></li>
+                <li><a href="#"><i class="fa fa-tasks"></i> Jobs</a></li>
                 <li><a href="#"><i class="fa fa-calendar"></i> Schedule</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
