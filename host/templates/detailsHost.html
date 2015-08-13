@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load systemtags %}
+{% block container %}
+    <div class="row">
+        <div class="col-md-12">
+            <a href="#addjob" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addjob"><span
+                    class="fa fa-tasks"></span> Add Job</a>
+            <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Details
+                for {{ details_host.hostInfo.hostname }}</h4>
+
+            <div class="panel panel-helios">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title">Details</h3>
+                </div>
+                <!-- Table -->
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ip</th>
+                        <th>Jobs</th>
+                        <th>Arch</th>
+                        <th>Cpu</th>
+                        <th>Avg</th>
+                        <th>Memory</th>
+                        <th>Memory Free</th>
+                        <th>Swap</th>
+                        <th>Swap Free</th>
+                        <th>Uptime</th>
+                        <th>Helios</th>
+                        <th>Docker</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="hostList cursor-pointer {% if details_host.status == 'DOWN' %}alert-danger{% endif %}"
+                        data-host="{{ details_host.hostInfo.hostname }}">
+                        <td>{{ details_host.agentInfo.name }}</td>
+                        <td>ip</td>
+                        <td>{{ details_host.jobs|length }}</td>
+                        <td>{{ details_host.hostInfo.architecture }}</td>
+                        <td>{{ details_host.hostInfo.cpus }}</td>
+                        <td>{{ details_host.hostInfo.loadAvg }}</td>
+                        <td>{{ details_host.hostInfo.memoryTotalBytes|filesizeformat }}</td>
+                        <td>{{ details_host.hostInfo.memoryFreeBytes|filesizeformat }}</td>
+                        <td>{{ details_host.hostInfo.swapTotalBytes|filesizeformat }}</td>
+                        <td>{{ details_host.hostInfo.swapFreeBytes|filesizeformat }}</td>
+                        <td>{{ details_host.agentInfo.uptime|humanDuration }}</td>
+                        <td>{{ details_host.agentInfo.version }}</td>
+                        <td>{{ details_host.hostInfo.dockerVersion.version }}</td>
+                        <td>{{ details_host.status|lower }}
+                            <div class="host-status-{{ details_host.status|lower }}"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">RAM</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="memory"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">SWAP</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="swap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Jobs</div>
+                <!-- Table -->
+                <div id="detailsJobs"></div>
+            </div>
+        </div>
+    </div>
+    {% include 'addJobModal.html' %}
+{% endblock %}
+
+{% block extrajs %}
+<script src="{{ STATIC_URL }}js/host.js"></script>
+<script src="{{ STATIC_URL }}js/helios.js"></script>
+<script src="{{ STATIC_URL }}js/highcharts.js"></script>
+<script>
+    $(document).ready(function () {
+        refreshJobs();
+    });
+
+    function refreshJobs() {
+        $('#detailsJobs').load('{% url 'detailsJob' details_host.hostInfo.hostname %}');
+        setTimeout(refreshJobs, 3000); // you could choose not to continue on failure...
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
+
+            var chart;
+            $('#memory').highcharts({
+                chart: {
+                    type: 'line',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    events: {
+                        load: function () {
+
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            setInterval(function () {
+                                $.ajax({
+                                    "url": "{% url 'detailsMemoryHost' details_host.hostInfo.hostname %}",
+                                    "type": "get",
+                                    "dataType": "json",
+                                    "success": function (data) {
+                                        var x = (new Date()).getTime(), // current time
+                                                y = parseInt(data.memory / 1024 / 1024);
+                                        series.addPoint([x, y], true, true);
+                                    }
+                                });
+                            }, 1000);
+                        }
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'MB'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#F3645B',
+                        lineColor: '#92A8CD',
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'RAM Usage',
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+
+                        for (i = -10; i <= 0; i++) {
+                            data.push({
+                                x: time + i * 1000,
+                                y: 0
+                            });
+                        }
+                        return data;
+                    })()
+                }]
+            });
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
+
+            var chart;
+            $('#swap').highcharts({
+                chart: {
+                    type: 'line',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    events: {
+                        load: function () {
+
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            setInterval(function () {
+                                $.ajax({
+                                    "url": "{% url 'detailsSwapHost' details_host.hostInfo.hostname %}",
+                                    "type": "get",
+                                    "dataType": "json",
+                                    "success": function (data) {
+                                        var x = (new Date()).getTime(), // current time
+                                                y = parseInt(data.memory / 1024 / 1024);
+                                        series.addPoint([x, y], true, true);
+                                    }
+                                });
+                            }, 1000);
+                        }
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'MB'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#F3645B',
+                        lineColor: '#92A8CD',
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'SWAP Usage',
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+
+                        for (i = -10; i <= 0; i++) {
+                            data.push({
+                                x: time + i * 1000,
+                                y: 0
+                            });
+                        }
+                        return data;
+                    })()
+                }]
+            });
+        });
+
+    });
+</script>
+{% endblock %}

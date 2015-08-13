@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('hostapp',
+urlpatterns = patterns('host',
     # Examples:
     url(r'^$', 'views.list_host', name='listHost'),
     url(r'^details/(?P<host>[\w.,/_\-]+)/$', 'views.details_host', name='detailsHost'),
