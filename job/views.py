@@ -1,10 +1,13 @@
-import requests
+import json
 
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+
+import requests
 
 # Create your views here.
 @login_required
@@ -38,8 +41,7 @@ def showJob(request):
 
 @login_required
 def detailsJob(request, host):
-
-    host_status = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
+    host_status = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + host + '/status')
     details_host = host_status.json()
 
     jobsList = []
@@ -47,7 +49,8 @@ def detailsJob(request, host):
         dicc = {'hostname': job, 'name': details_host['statuses'][job]['job']['id'],
                 'containerid': details_host['statuses'][job]['containerId'],
                 'goal': details_host['statuses'][job]['goal'], 'state': details_host['statuses'][job]['state'],
-                'throttled': details_host['statuses'][job]['throttled'], 'image': details_host['statuses'][job]['job']['image']}
+                'throttled': details_host['statuses'][job]['throttled'],
+                'image': details_host['statuses'][job]['job']['image']}
 
         ports_list = []
         for port in details_host['statuses'][job]['ports'].keys():
@@ -65,3 +68,22 @@ def detailsJob(request, host):
     }
 
     return render_to_response('detailsJob.html', data, RequestContext(request))
+
+@login_required
+def showAllJob(request):
+    if request.is_ajax():
+        jobs_request = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/jobs/')
+        job_json = jobs_request.json()
+
+        job_list = []
+        for job in job_json.keys():
+            name = job.split(':')
+            list = {'id':job, 'name': name[0]+':'+name[1]}
+            job_list.append(list)
+
+        return HttpResponse(json.dumps(job_list), content_type='application/json')
+
+@login_required
+def deployJob(request):
+    if request.is_ajax():
+        jobs_deploy = requests.put('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+  +'/jobs/'+  +'/')

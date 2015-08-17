@@ -68,9 +68,6 @@ def host_swap(request, host):
     host_status = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
     details_host = host_status.json()
 
-    if details_host['hostInfo']['swapTotalBytes']-details_host['hostInfo']['swapFreeBytes'] == 0:
-        msg = {'memory': details_host['hostInfo']['swapTotalBytes']}
-    else:
-        msg = {'memory': details_host['hostInfo']['swapTotalBytes']-details_host['hostInfo']['swapFreeBytes']}
+    msg = {'swap': details_host['hostInfo']['swapTotalBytes']-details_host['hostInfo']['swapFreeBytes']}
 
     return HttpResponse(json.dumps(msg))

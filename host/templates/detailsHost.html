@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% load systemtags %}
+{% block extracss %}
+    <link href="{{ STATIC_URL }}css/chosen.min.css" rel="stylesheet">
+{% endblock %}
 {% block container %}
     <div class="row">
         <div class="col-md-12">
             <a href="#addjob" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addjob"><span
-                    class="fa fa-tasks"></span> Add Job</a>
+                    class="fa fa-tasks"></span> Deploy Job</a>
             <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Details
                 for {{ details_host.hostInfo.hostname }}</h4>
 
@@ -97,11 +100,33 @@
 <script src="{{ STATIC_URL }}js/host.js"></script>
 <script src="{{ STATIC_URL }}js/helios.js"></script>
 <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+<script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         refreshJobs();
     });
+    $('#jobList').chosen({width:"100%"});
+    $('#jobList').on('chosen:showing_dropdown', function (event, params) {
+        $.get("{% url 'showAllJob' %}", function (data) {
+            var options = '<option value=""></option>';
+            for (var i = 0; i < data.length; i++) {
+                options += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>'
+            }
+            $('#jobList').html(options).chosen().trigger("chosen:updated");
+        }, "json");
+    });
+    $('#deployJob').on('click', function (){
+{#        alert($('#jobList').val());#}
+{#        alert($('#jobList').data('host'));#}
+{#        csrfmiddlewaretoken#}
 
+        $.post("http://node.jacquisflowershop.com/order", requestData,
+                function (responseData) {
+                    console.log(JSON.stringify(responseData));
+                })
+        e.preventDefault();
+
+    })
     function refreshJobs() {
         $('#detailsJobs').load('{% url 'detailsJob' details_host.hostInfo.hostname %}');
         setTimeout(refreshJobs, 3000); // you could choose not to continue on failure...
@@ -223,7 +248,7 @@
                                     "dataType": "json",
                                     "success": function (data) {
                                         var x = (new Date()).getTime(), // current time
-                                                y = parseInt(data.memory / 1024 / 1024);
+                                                y = parseInt(data.swap / 1024 / 1024);
                                         series.addPoint([x, y], true, true);
                                     }
                                 });
