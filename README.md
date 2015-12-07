@@ -5,8 +5,8 @@ Web front-end for Helios
 
 Requirements
 ==============
-*Django == 1.7
-*request == 2.0
+* Django == 1.7
+* request == 2.0
 
 Configuration
 ==============
