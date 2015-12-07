@@ -16,7 +16,7 @@
                 <tbody>
                 {% for hosts in listHost %}
                     <tr{% if hosts.status == 'DOWN' %} class="alert-danger"{% endif %}>
-                        <td>{{ hosts.agentInfo.name }}</td>
+                        <td>{{ hosts.agentInfo.name|lower }}</td>
                         <td>ip</td>
                         <td>{{ hosts.agentInfo.uptime|humanDuration }}</td>
                         <td>{{ hosts.status|lower }}

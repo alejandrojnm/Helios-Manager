@@ -87,3 +87,14 @@ def showAllJob(request):
 def deployJob(request):
     if request.is_ajax():
         jobs_deploy = requests.put('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+  +'/jobs/'+  +'/')
+
+@csrf_exempt
+@login_required
+def undeployJob(request):
+    if request.is_ajax():
+        jobs_delete = requests.delete('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+request.POST['host']+'/jobs/'+request.POST['job']+'/')
+        jobs_result = jobs_delete.json()
+
+        list = {'status':jobs_result['status'], 'job': jobs_result['job']}
+
+        return HttpResponse(json.dumps(list), content_type='application/json')

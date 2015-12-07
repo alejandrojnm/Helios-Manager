@@ -7,6 +7,7 @@ urlpatterns = patterns('job',
     url(r'^show/$', 'views.showJob', name='showJob'),
     url(r'^details/(?P<host>[\w.,/_\-]+)/$', 'views.detailsJob', name='detailsJob'),
     url(r'^deploy/$', 'views.deployJob', name='deployJob'),
+    url(r'^undeploy/$', 'views.undeployJob', name='undeployJob'),
 
     # JSON
     url(r'^show/all/$', 'views.showAllJob', name='showAllJob'),

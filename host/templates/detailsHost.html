@@ -2,6 +2,7 @@
 {% load systemtags %}
 {% block extracss %}
     <link href="{{ STATIC_URL }}css/chosen.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-notify.css" rel="stylesheet">
 {% endblock %}
 {% block container %}
     <div class="row">
@@ -39,7 +40,7 @@
                     <tbody>
                     <tr class="hostList cursor-pointer {% if details_host.status == 'DOWN' %}alert-danger{% endif %}"
                         data-host="{{ details_host.hostInfo.hostname }}">
-                        <td>{{ details_host.agentInfo.name }}</td>
+                        <td>{{ details_host.agentInfo.name|lower }}</td>
                         <td>ip</td>
                         <td>{{ details_host.jobs|length }}</td>
                         <td>{{ details_host.hostInfo.architecture }}</td>
@@ -94,6 +95,7 @@
         </div>
     </div>
     {% include 'addJobModal.html' %}
+    <div class='notifications top-right'></div>
 {% endblock %}
 
 {% block extrajs %}
@@ -101,6 +103,7 @@
 <script src="{{ STATIC_URL }}js/helios.js"></script>
 <script src="{{ STATIC_URL }}js/highcharts.js"></script>
 <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap-notify.js"></script>
 <script>
     $(document).ready(function () {
         refreshJobs();
@@ -115,18 +118,6 @@
             $('#jobList').html(options).chosen().trigger("chosen:updated");
         }, "json");
     });
-    $('#deployJob').on('click', function (){
-{#        alert($('#jobList').val());#}
-{#        alert($('#jobList').data('host'));#}
-{#        csrfmiddlewaretoken#}
-
-        $.post("http://node.jacquisflowershop.com/order", requestData,
-                function (responseData) {
-                    console.log(JSON.stringify(responseData));
-                })
-        e.preventDefault();
-
-    })
     function refreshJobs() {
         $('#detailsJobs').load('{% url 'detailsJob' details_host.hostInfo.hostname %}');
         setTimeout(refreshJobs, 3000); // you could choose not to continue on failure...

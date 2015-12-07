@@ -18,7 +18,7 @@
             <td>[{{ job.ports.0.externalport }}:{{ job.ports.0.internalport }}]</td>
             <td>{{ job.state|lower }}</td>
             <td>
-                <a class="btn btn-default" data-toggle="tooltip"
+                <a class="btn btn-default undeploy" data-job="{{ job.name }}" data-host="{{ details_host.hostInfo.hostname }}" data-toggle="tooltip"
                    title="{% ifequal job.state 'RUNNING' %}Undeploy Job{% else %}Deploy Job{% endifequal %}"><span
                         class="fa fa-{% ifequal job.state 'RUNNING' %}stop{% else %}pause{% endifequal %}"></span> </a>
             </td>
@@ -31,3 +31,4 @@
     </tbody>
 </table>
 <script src="{{ STATIC_URL }}js/helios.js"></script>
+<script src="{{ STATIC_URL }}js/jobs.js"></script>

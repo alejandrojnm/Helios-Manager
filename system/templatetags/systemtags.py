@@ -10,19 +10,22 @@ def humanduration(value):
     """
 
     time = int(value)
-
-    # sec
-    if time / 1000 < 60:
-        return "%i Sec" % (time / 1000)
-
-    # min
-    if time / 1000 / 60 < 60:
-        return "%i Min" % (time / 1000 / 60)
+    # days
+    if time / 1000 / 3600 > 24:
+        days = time / 1000 / 3600 / 24
+        return "%i days" % days
 
     # hours
     if time / 1000 / 60 > 60:
         return "%i hours" % (time / 1000 / 3600)
 
+    # min
+    if time / 1000 / 60 < 60:
+        return "%i Min" % (time / 1000 / 60)
+
+    # sec
+    if time / 1000 < 60:
+        return "%i Sec" % (time / 1000)
 
 def js(obj):
     """
