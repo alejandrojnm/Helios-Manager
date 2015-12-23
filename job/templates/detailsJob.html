@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     {% for job in jobsList %}
-        <tr{% if job.state == 'FAILED' %} class="alert-danger"{% elif job.state == 'PULLING_IMAGE' %} class="alert-warning" {% elif job.state == 'CREATING' %} class="alert-success" {% endif %}>
+        <tr{% if job.state == 'FAILED' %} class="alert-danger"{% elif job.state == 'PULLING_IMAGE' %} class="alert-warning" {% elif job.state == 'CREATING' %} class="alert-success" {% elif job.state == 'STOPPED' %} class="alert-info" {% endif %}>
             <td>{{ job.name|truncatechars:25 }}</td>
             <td>{{ job.image }}</td>
             <td>{{ job.containerid|truncatechars:20|default_if_none:'Unknow' }}</td>
@@ -20,7 +20,10 @@
             <td>
                 <a class="btn btn-default undeploy" data-job="{{ job.name }}" data-host="{{ details_host.hostInfo.hostname }}" data-toggle="tooltip"
                    title="{% ifequal job.state 'RUNNING' %}Undeploy Job{% else %}Deploy Job{% endifequal %}"><span
-                        class="fa fa-{% ifequal job.state 'RUNNING' %}stop{% else %}pause{% endifequal %}"></span> </a>
+                        class="fa fa-{% ifequal job.state 'RUNNING' %}trash-o{% else %}pause{% endifequal %}"></span> </a>
+            <a class="btn btn-default start-stop" data-job="{{ job.name }}" data-host="{{ details_host.hostInfo.hostname }}" data-toggle="tooltip"
+                   title="{% if job.state == 'RUNNING' %}Stop job{% else %}Start job{% endif %}"><span
+                        class="fa fa-{% if job.state == 'RUNNING' %}stop{% else %}play{% endif %}"></span> </a>
             </td>
         </tr>
     {% empty %}
