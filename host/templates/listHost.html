@@ -16,7 +16,7 @@
                            data-container="body" data-toggle="popover"
                            data-placement="bottom" data-html="true"
                            data-content="<strong>Status:</strong> {{ hosts.status|lower }}<br><strong>Uptime:</strong> {{ hosts.agentInfo.uptime|humanDuration }}<br><strong>Jobs:</strong> {{ hosts.jobs|length }}<br><strong>Arch:</strong> {{ hosts.hostInfo.architecture }}<br><strong>Memory:</strong> {{ hosts.hostInfo.memoryTotalBytes|filesizeformat }}<br><strong>Memory Free:</strong> {{ hosts.hostInfo.memoryFreeBytes|filesizeformat }}<br><strong>Helios:</strong> {{ hosts.agentInfo.version }}<br><strong>Docker:</strong> {{ hosts.hostInfo.dockerVersion.version }}">
-                            <img src="{{ STATIC_URL }}img/debian.png" alt="debian">
+                            <img src="{{ STATIC_URL }}img/{{ hosts.hostInfo.uname|systemName }}" alt="debian">
                             <div class="caption">
                                 <h4>{{ hosts.hostInfo.hostname }}
                                     <div class="host-status-list-{{ hosts.status|lower }}"></div>

@@ -27,6 +27,29 @@ def humanduration(value):
     if time / 1000 < 60:
         return "%i Sec" % (time / 1000)
 
+
+def systemname(value):
+    """
+    return the corret img base in de uname of the system
+    :param value: str
+    :return: str
+    """
+    if 'Debian' in value:
+        return "debian.png"
+
+    if 'Fedora' in value:
+        return "fedora.png"
+
+    if 'Ubuntu' in value:
+        return "ubuntu.png"
+
+    if 'Centos' in value:
+        return "centos.png"
+
+    if 'Redhat' in value:
+        return "redhat.png"
+
+
 def js(obj):
     """
     Cleaner js from DB for Filter CamanJS
@@ -38,4 +61,5 @@ def js(obj):
 
 register = template.Library()
 register.filter('humanDuration', humanduration)
+register.filter('systemName', systemname)
 register.filter('js', js)
