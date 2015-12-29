@@ -18,7 +18,7 @@ $('.jobs').click(function (e) {
 
 $('.undeploy').click(function (e) {
 
-    var btn = $(this)
+    var btn = $(this);
     var idhost = btn.data('host');
     var idjob = btn.data('job');
 
@@ -49,7 +49,7 @@ $('.undeploy').click(function (e) {
 
 $('.start-stop').click(function (e) {
 
-    var btn = $(this)
+    var btn = $(this);
     var idhost = btn.data('host');
     var idjob = btn.data('job');
     var statusjob = btn.data('status');

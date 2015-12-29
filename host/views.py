@@ -9,13 +9,12 @@ from django.conf import settings
 # Create your views here.
 @login_required
 def list_host(request):
-
-    allhost = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/')
+    allhost = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/')
     allh = allhost.json()
 
     listHost = []
     for host in allh:
-        host_list = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
+        host_list = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + host + '/status')
         listHost.append(host_list.json())
 
     data = {
@@ -24,10 +23,10 @@ def list_host(request):
 
     return render_to_response('listHost.html', data, RequestContext(request))
 
+
 @login_required
 def details_host(request, host):
-
-    host_status = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
+    host_status = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + host + '/status')
     details_host = host_status.json()
 
     jobsList = []
@@ -35,7 +34,8 @@ def details_host(request, host):
         dicc = {'hostname': job, 'name': details_host['statuses'][job]['job']['id'],
                 'containerid': details_host['statuses'][job]['containerId'],
                 'goal': details_host['statuses'][job]['goal'], 'state': details_host['statuses'][job]['state'],
-                'throttled': details_host['statuses'][job]['throttled'], 'image': details_host['statuses'][job]['job']['image']}
+                'throttled': details_host['statuses'][job]['throttled'],
+                'image': details_host['statuses'][job]['job']['image']}
 
         ports_list = []
         for port in details_host['statuses'][job]['ports'].keys():
@@ -54,20 +54,22 @@ def details_host(request, host):
 
     return render_to_response('detailsHost.html', data, RequestContext(request))
 
+
 @login_required
 def host_memory(request, host):
-    host_status = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
+    host_status = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + host + '/status')
     details_host = host_status.json()
 
-    msg = {'memory': details_host['hostInfo']['memoryTotalBytes']-details_host['hostInfo']['memoryFreeBytes']}
+    msg = {'memory': details_host['hostInfo']['memoryTotalBytes'] - details_host['hostInfo']['memoryFreeBytes']}
 
     return HttpResponse(json.dumps(msg))
 
+
 @login_required
 def host_swap(request, host):
-    host_status = requests.get('http://'+settings.HELIOS_HOST_MASTER+'/hosts/'+host+'/status')
+    host_status = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + host + '/status')
     details_host = host_status.json()
 
-    msg = {'swap': details_host['hostInfo']['swapTotalBytes']-details_host['hostInfo']['swapFreeBytes']}
+    msg = {'swap': details_host['hostInfo']['swapTotalBytes'] - details_host['hostInfo']['swapFreeBytes']}
 
     return HttpResponse(json.dumps(msg))

@@ -77,7 +77,7 @@ def listAllJob(request):
 
     list_job = []
     for job in job_json.keys():
-        dicc = {"id": job, "image": job_json[job]['image'], "creatingUser":job_json[job]['creatingUser']}
+        dicc = {"id": job, "image": job_json[job]['image'], "creatingUser": job_json[job]['creatingUser']}
         list_job.append(dicc)
 
     data = {
@@ -85,6 +85,7 @@ def listAllJob(request):
     }
 
     return render_to_response('listJob.html', data, RequestContext(request))
+
 
 @login_required
 def showAllJob(request):
@@ -95,10 +96,11 @@ def showAllJob(request):
         job_list = []
         for job in job_json.keys():
             name = job.split(':')
-            list = {'id':job, 'name': name[0]+':'+name[1]}
+            list = {'id': job, 'name': name[0] + ':' + name[1]}
             job_list.append(list)
 
         return HttpResponse(json.dumps(job_list), content_type='application/json')
+
 
 @csrf_exempt
 @login_required
@@ -106,21 +108,27 @@ def deployJob(request):
     if request.is_ajax():
         body = {"goal": "START", "deployerUser": "root", "jobId": request.POST['job']}
         headers = {'content-type': 'application/json'}
-        jobs_deploy = requests.put('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+ request.POST['host'] +'/jobs/'+ request.POST['job'] +'?token=&user=root', data=json.dumps(body), headers=headers)
+        jobs_deploy = requests.put(
+            'http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + request.POST['host'] + '/jobs/' + request.POST[
+                'job'] + '?token=&user=root', data=json.dumps(body), headers=headers)
         jobs_result = jobs_deploy.json()
-        list = {'status':jobs_result['status'], 'job': jobs_result['job']}
+        list = {'status': jobs_result['status'], 'job': jobs_result['job']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')
+
 
 @csrf_exempt
 @login_required
 def undeployJob(request):
     if request.is_ajax():
-        jobs_delete = requests.delete('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+request.POST['host']+'/jobs/'+request.POST['job']+'/')
+        jobs_delete = requests.delete(
+            'http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + request.POST['host'] + '/jobs/' + request.POST[
+                'job'] + '/')
         jobs_result = jobs_delete.json()
-        list = {'status':jobs_result['status'], 'job': jobs_result['job']}
+        list = {'status': jobs_result['status'], 'job': jobs_result['job']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')
+
 
 @csrf_exempt
 @login_required
@@ -133,9 +141,11 @@ def startstopJob(request):
             body = {"goal": "START", "deployerUser": "null", "jobId": request.POST['job']}
 
         headers = {'content-type': 'application/json'}
-        jobs_startstop = requests.patch('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+request.POST['host']+'/jobs/'+request.POST['job']+'/', data=json.dumps(body), headers=headers)
+        jobs_startstop = requests.patch(
+            'http://' + settings.HELIOS_HOST_MASTER + '/hosts/' + request.POST['host'] + '/jobs/' + request.POST[
+                'job'] + '/', data=json.dumps(body), headers=headers)
         jobs_result = jobs_startstop.json()
 
-        list = {'status':jobs_result['status'], 'job': jobs_result['job'], 'host': jobs_result['host']}
+        list = {'status': jobs_result['status'], 'job': jobs_result['job'], 'host': jobs_result['host']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')
