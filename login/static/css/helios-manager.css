@@ -36,7 +36,7 @@ body{
 }
 
 .navbar-helios .navbar-nav > .active > a, .navbar-helios .navbar-nav > .active > a:hover, .navbar-helios .navbar-nav > .active > a:focus {
-    color: #ffff;
+    color: #FFFFFF;
     background-color: #F3645B
 }
 
@@ -70,7 +70,7 @@ body{
 /* page header helios*/
 .page-header-helios {
     padding-bottom: 9px;
-    margin: 0px 0 0px;
+    margin: 0 0 0;
     border-bottom: 2px solid #373737;
     color: #373737;
     font-family: 'Roboto-light';
@@ -128,7 +128,7 @@ body{
 }
 
 .job-status {
-    margin-left: 130px;
+    margin-left: 70px;
 }
 
 .hostpick {
@@ -156,9 +156,9 @@ body{
     background-color: rgb(255, 255, 255);
     background-clip: padding-box;
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
     outline: medium none;
-    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 }
 /**/
 
@@ -236,7 +236,7 @@ a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
     border-right: 0px none;
     border-width: 1px 0px 0px;
     border-style: solid none none;
-    border-color: #EEE -moz-use-text-color -moz-use-text-color;
+    border-color: #EEEEEE -moz-use-text-color -moz-use-text-color;
     -moz-border-top-colors: none;
     -moz-border-right-colors: none;
     -moz-border-bottom-colors: none;

@@ -23,6 +23,10 @@
                 <div class="host-status-up job-status"></div>{% else %}
                 <div class="host-status-down job-status"></div>{% endifequal %}</td>
         </tr>
+    {% empty %}
+        <tr>
+        <td colspan="6" class="text-center">This job is not deploy in any active server</td>
+        </tr>
     {% endfor %}
     </tbody>
 </table>
