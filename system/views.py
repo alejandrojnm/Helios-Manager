@@ -29,7 +29,7 @@ def dashboard(request):
 
     jobs = []
     for job in allj:
-        dicc = {'id': allj[job]['id'], 'name': job.split(':')[0], 'version':job.split(':')[1]}
+        dicc = {'id': allj[job]['id']}
 
         ports_list = []
         for port in allj[job]['ports']:

@@ -33,11 +33,44 @@ $('.undeploy').click(function (e) {
             if (result.status == 'OK') {
                 $('.top-right').notify({
                     message: {text: 'Undepoy job ' + result.job + ' success'},
-                    closable: false
+                    closable: true,
+                    type: 'info'
                 }).show();
             }
             else {
                 console.log('Undepoy jobs Fails')
+            }
+        },
+        error: function (jqXHR, status, error) {
+            console.log("status:", status);
+        }
+    });
+});
+
+$('.start-stop').click(function (e) {
+
+    var btn = $(this)
+    var idhost = btn.data('host');
+    var idjob = btn.data('job');
+    var statusjob = btn.data('status');
+
+    var dataString = "host=" + idhost + "&job=" + idjob + "&status=" + statusjob;
+
+    $.ajax({
+        url: "/job/start-stop/",
+        type: "POST",
+        data: dataString,
+        dataType: "json",
+        success: function (result) {
+            if (result.status == 'OK') {
+                $('.top-right').notify({
+                    message: {text: 'The job ' + result.job + ' in '+ result.host +' was '+ statusjob +' success'},
+                    closable: true,
+                    type: 'info'
+                }).show();
+            }
+            else {
+                console.log('Stop job Fails')
             }
         },
         error: function (jqXHR, status, error) {

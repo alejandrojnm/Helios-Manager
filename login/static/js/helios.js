@@ -4,4 +4,17 @@
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover({trigger: 'hover', 'placement': 'bottom'});
     $('[data-toggle="tooltip"]').tooltip();
+
+    //multiple select tr
+    //$("#data tr").click(function () {
+    //    $(this).toggleClass("highlight");
+    //});
+
+    //only select one tr
+    //$("#data tr").click(function () {
+    //    var selected = $(this).hasClass("highlight");
+    //    $("#data tr").removeClass("highlight");
+    //    if (!selected)
+    //        $(this).addClass("highlight");
+    //});
 });

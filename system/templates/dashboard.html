@@ -61,9 +61,13 @@
                 {% for job in listJobs %}
                     <tr>
                         <td><a href="#" class="jobs" data-id="{{ job.id }}">{{ job.id|truncatechars:20 }}</a></td>
-                        <td>{{ job.name }}</td>
-                        <td>{{ job.version }}</td>
+                        <td>{{ job.id|getName }}</td>
+                        <td>{{ job.id|getVersion }}</td>
                         <td>{{ job.ports }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">there's no job to show</td>
                     </tr>
                 {% endfor %}
                 </tbody>

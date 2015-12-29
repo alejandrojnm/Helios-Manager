@@ -100,10 +100,17 @@ def showAllJob(request):
 
         return HttpResponse(json.dumps(job_list), content_type='application/json')
 
+@csrf_exempt
 @login_required
 def deployJob(request):
     if request.is_ajax():
-        jobs_deploy = requests.put('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+  +'/jobs/'+  +'/')
+        body = {"goal": "START", "deployerUser": "root", "jobId": request.POST['job']}
+        headers = {'content-type': 'application/json'}
+        jobs_deploy = requests.put('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+ request.POST['host'] +'/jobs/'+ request.POST['job'] +'?token=&user=root', data=json.dumps(body), headers=headers)
+        jobs_result = jobs_deploy.json()
+        list = {'status':jobs_result['status'], 'job': jobs_result['job']}
+
+        return HttpResponse(json.dumps(list), content_type='application/json')
 
 @csrf_exempt
 @login_required
@@ -111,7 +118,6 @@ def undeployJob(request):
     if request.is_ajax():
         jobs_delete = requests.delete('http://' + settings.HELIOS_HOST_MASTER + '/hosts/'+request.POST['host']+'/jobs/'+request.POST['job']+'/')
         jobs_result = jobs_delete.json()
-
         list = {'status':jobs_result['status'], 'job': jobs_result['job']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')

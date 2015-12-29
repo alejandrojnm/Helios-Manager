@@ -50,6 +50,14 @@ def systemname(value):
         return "redhat.png"
 
 
+def getname(value):
+    name = value.split(':')
+    return name[0]
+
+def getversion(value):
+    name = value.split(':')
+    return name[1]
+
 def js(obj):
     """
     Cleaner js from DB for Filter CamanJS
@@ -62,4 +70,6 @@ def js(obj):
 register = template.Library()
 register.filter('humanDuration', humanduration)
 register.filter('systemName', systemname)
+register.filter('getName', getname)
+register.filter('getVersion', getversion)
 register.filter('js', js)
