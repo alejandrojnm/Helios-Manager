@@ -11,7 +11,6 @@ import requests
 
 # Create your views here.
 @login_required
-@csrf_exempt
 def showJob(request):
     jobs_request = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/jobs/' + request.POST['id'] + '/status')
     job_json = jobs_request.json()
@@ -102,7 +101,6 @@ def showAllJob(request):
         return HttpResponse(json.dumps(job_list), content_type='application/json')
 
 
-@csrf_exempt
 @login_required
 def deployJob(request):
     if request.is_ajax():
@@ -117,7 +115,6 @@ def deployJob(request):
         return HttpResponse(json.dumps(list), content_type='application/json')
 
 
-@csrf_exempt
 @login_required
 def undeployJob(request):
     if request.is_ajax():
@@ -130,7 +127,6 @@ def undeployJob(request):
         return HttpResponse(json.dumps(list), content_type='application/json')
 
 
-@csrf_exempt
 @login_required
 def startstopJob(request):
     if request.is_ajax():

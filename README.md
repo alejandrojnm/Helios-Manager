@@ -13,6 +13,15 @@ Configuration
 
 Change in settings.py the HELIOS_HOST_MASTER for you helios master ip or name
 
+Ideas
+==============
+
+These are things we want, but haven't gotten to.  If you feel
+inspired, we'd love to talk to you about these (in no particular
+order):
+
+* Users and Groups (You can assing to a user, one o more server to administrate)
+
 Screenshots
 ==============
 ![1](https://cloud.githubusercontent.com/assets/7557763/9275034/478c1bde-4268-11e5-893a-4abddf25eea2.png)
