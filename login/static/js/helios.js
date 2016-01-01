@@ -13,6 +13,7 @@ $(document).ready(function () {
     //only select one tr
     //$("#data tr").click(function () {
     //    var selected = $(this).hasClass("highlight");
+    //    //console.log($(this).attr('id'))
     //    $("#data tr").removeClass("highlight");
     //    if (!selected)
     //        $(this).addClass("highlight");

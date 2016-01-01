@@ -16,6 +16,38 @@ $('.jobs').click(function (e) {
 
 });
 
+$('.removejob').click(function (e) {
+
+    var btn = $(this);
+    var idjob = btn.data('job');
+
+    var dataString = "job=" + idjob;
+
+    console.log(dataString)
+
+    //$.ajax({
+    //    url: "/job/remove/",
+    //    type: "POST",
+    //    data: dataString,
+    //    dataType: "json",
+    //    success: function (result) {
+    //        if (result.status == 'OK') {
+    //            $('.top-right').notify({
+    //                message: {text: 'Undepoy job ' + result.job + ' success'},
+    //                closable: true,
+    //                type: 'info'
+    //            }).show();
+    //        }
+    //        else {
+    //            console.log('Undepoy jobs Fails')
+    //        }
+    //    },
+    //    error: function (jqXHR, status, error) {
+    //        console.log("status:", status);
+    //    }
+    //});
+});
+
 $('.undeploy').click(function (e) {
 
     var btn = $(this);
@@ -64,7 +96,7 @@ $('.start-stop').click(function (e) {
         success: function (result) {
             if (result.status == 'OK') {
                 $('.top-right').notify({
-                    message: {text: 'The job ' + result.job + ' in '+ result.host +' was '+ statusjob +' success'},
+                    message: {text: 'The job ' + result.job + ' in ' + result.host + ' was ' + statusjob + ' success'},
                     closable: true,
                     type: 'info'
                 }).show();
