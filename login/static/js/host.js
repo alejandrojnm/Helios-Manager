@@ -20,12 +20,13 @@ $('#deployJob').click(function(e){
         data: dataString,
         dataType: "json",
         success: function (result) {
+            var jobName = result.job.split(':');
             if (result.status == 'OK') {
                 $('#addjob').modal('toggle');
                 $('.top-right').notify({
-                    message: {text: 'Job ' + result.job + ' was deploy success'},
-                    closable: true,
-                    type: 'info'
+                    message: {text: 'Job '+ jobName[0]+':'+jobName[1] +' was deploy success'},
+                    closable: false,
+                    type: 'bangTidy'
                 }).show();
             }
             else {

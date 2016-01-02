@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 {% load systemtags %}
+{% block extracss %}
+    <link href="{{ STATIC_URL }}css/bootstrap-notify.css" rel="stylesheet">
+{% endblock %}
 {% block container %}
     <div class="row">
         <div class="col-lg-12">
             <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
+                <a href="#" class="btn btn-primary disabled"><span class="fa fa-download"></span> Download Job</a>
                 <a href="#" class="btn btn-info"><span class="fa fa-upload"></span> Load Job</a>
                 <a href="#" class="btn btn-success"><span class="fa fa-plus"></span> Create Job</a>
             </div>
             <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Job List</h4>
-            <style>
-                .highlight { background-color: rgba(243, 100, 91, 0.24); }
-            </style>
-            <table class="table" id="data">
+
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-hover" id="data">
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
                     <th>Version</th>
                     <th>Image</th>
                     <th>User</th>
@@ -24,19 +27,15 @@
                 </thead>
                 <tbody>
                 {% for job in listJob %}
-                <tr class="cursor-pointer" data-toggle="collapse" data-target="#{{ forloop.counter0 }}" aria-expanded="false">
+                <tr id="{{ job.id }}">
                     <td>{{ job.id|truncatechars:25 }}</td>
-                    <td>{{ job.id|getName }}</td>
                     <td>{{ job.id|getVersion }}</td>
                     <td>{{ job.image }}</td>
                     <td>{{ job.creatingUser }}</td>
                     <td>
-                        <a class="btn btn-default" data-job="{{ job.id|getName }}" data-toggle="tooltip"
-                   title="Remove Job"><span class="fa fa-trash-o"></span> </a>
+                        <a class="btn btn-default removejob" data-job="{{ job.id }}" data-toggle="tooltip" title="Remove Job"><span class="fa fa-trash-o"></span></a>
+                        <a class="btn btn-default historyjob" data-job="{{ job.id }}" data-toggle="tooltip" title="Show job history"><span class="fa fa-history"></span></a>
                     </td>
-                </tr>
-                <tr id="{{ forloop.counter0 }}" class="collapse">
-                    <td colspan="6">dfasdfasdf</td>
                 </tr>
                 {% empty %}
                     <tr>
@@ -46,8 +45,11 @@
                 </tbody>
             </table>
         </div>
+{#        <div class="col-lg-6"></div>#}
     </div>
 {% endblock %}
 {% block extrajs %}
     <script src="{{ STATIC_URL }}js/helios.js"></script>
+    <script src="{{ STATIC_URL }}js/jobs.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-notify.js"></script>
 {% endblock %}

@@ -255,6 +255,20 @@ a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
 
 /**/
 
+
+
+/*Custom alert notify*/
+.alert-bangTidy {
+    box-sizing: border-box;
+    background: rgb(55, 55, 55);
+    border-top: 4px solid #F3645B;
+    overflow: hidden;
+    color: white;
+    border-radius: 0px;
+    -webkit-font-smoothing: antialiased;
+}
+/**/
+
 /**/
 .footer {
     color: #c0c0c0;

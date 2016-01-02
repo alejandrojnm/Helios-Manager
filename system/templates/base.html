@@ -63,6 +63,7 @@
 </nav>
 <div class="container">
 {% block container %}{% endblock %}
+<div class='notifications top-right'></div>
 <div class="row">
     <div class="col-md-12">
         <hr class="helios-hr">
@@ -77,7 +78,7 @@
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
 <script src="{{ STATIC_URL }}js/popover.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.circliful.min.js"></script>
-<script src="{{ STATIC_URL }}js/jobs.js"></script>
+<script src="{{ STATIC_URL }}js/showjobs.js"></script>
 {% block extrajs %}{% endblock %}
 <script>
     $( document ).ready(function() {

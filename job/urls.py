@@ -10,6 +10,7 @@ urlpatterns = patterns('job',
                        url(r'^deploy/$', 'views.deployJob', name='deployJob'),
                        url(r'^undeploy/$', 'views.undeployJob', name='undeployJob'),
                        url(r'^start-stop/$', 'views.startstopJob', name='startstopJob'),
+                       url(r'^remove/$', 'views.removeJob', name='removeJob'),
 
                        # JSON
                        url(r'^show/all/$', 'views.showAllJob', name='showAllJob'),

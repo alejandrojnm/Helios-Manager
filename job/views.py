@@ -145,3 +145,19 @@ def startstopJob(request):
         list = {'status': jobs_result['status'], 'job': jobs_result['job'], 'host': jobs_result['host']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')
+
+
+@login_required
+def removeJob(request):
+    if request.is_ajax():
+        headers = {'content-type': 'application/json'}
+        jobs_startstop = requests.delete(
+            'http://' + settings.HELIOS_HOST_MASTER + '/jobs/' + request.POST['job'] + '/', headers=headers)
+        jobs_result = jobs_startstop.json()
+
+        if jobs_result['status'] == 'STILL_IN_USE':
+            list = {'status': 'FAIL', 'job': request.POST['job']}
+        else:
+            list = {'status': jobs_result['status'], 'job': request.POST['job']}
+
+        return HttpResponse(json.dumps(list), content_type='application/json')
