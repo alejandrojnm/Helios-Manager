@@ -17,23 +17,24 @@ $('.removejob').click(function (e) {
             var jobName = result.job.split(':');
             if (result.status == 'OK') {
                 $('.top-right').notify({
-                    message: {text: 'Removing job ' + jobName[0]+':'+jobName[1] + ' success'},
+                    message: {html: 'Removing job <strong>' + jobName[0]+':'+jobName[1] + '</strong> success'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
+                btn[0].parentNode.parentNode.remove()
             }
             if(result.status == 'FAIL'){
                 $('.top-right').notify({
-                    message: {text: 'Error removing job ' + jobName[0]+':'+jobName[1] + ' still in use'},
+                    message: {html:'Error removing job <strong>' + jobName[0]+':'+jobName[1] + '</strong> is still deploy'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
             }
             if(result.status == 'JOB_NOT_FOUND'){
                 $('.top-right').notify({
-                    message: {text: 'The job ' + jobName[0]+':'+jobName[1] + ' not exist'},
+                    message: {html: 'The job <strong>' + jobName[0]+':'+jobName[1] + '</strong> not exist'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
             }
             //else {
@@ -63,9 +64,9 @@ $('.undeploy').click(function (e) {
             var jobName = result.job.split(':');
             if (result.status == 'OK') {
                 $('.top-right').notify({
-                    message: {text: 'Undepoy job ' + jobName[0]+':'+jobName[1] + ' success'},
+                    message: {html: 'Undepoy job <strong>' + jobName[0]+':'+jobName[1] + '</strong> success'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
             }
             else {
@@ -96,9 +97,9 @@ $('.start-stop').click(function (e) {
             var jobName = result.job.split(':');
             if (result.status == 'OK') {
                 $('.top-right').notify({
-                    message: {text: 'The job ' + jobName[0]+':'+jobName[1] + ' in ' + result.host + ' was ' + statusjob + ' success'},
+                    message: {html: 'The job <strong>' + jobName[0]+':'+jobName[1] + '</strong> in ' + result.host + ' was ' + statusjob + ' success'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
             }
             else {

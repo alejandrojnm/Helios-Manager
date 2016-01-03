@@ -258,7 +258,7 @@ a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
 
 
 /*Custom alert notify*/
-.alert-bangTidy {
+.alert-heliosmanager {
     box-sizing: border-box;
     background: rgb(55, 55, 55);
     border-top: 4px solid #F3645B;

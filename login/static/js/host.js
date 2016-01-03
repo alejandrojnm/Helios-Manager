@@ -24,9 +24,9 @@ $('#deployJob').click(function(e){
             if (result.status == 'OK') {
                 $('#addjob').modal('toggle');
                 $('.top-right').notify({
-                    message: {text: 'Job '+ jobName[0]+':'+jobName[1] +' was deploy success'},
+                    message: {html: 'Job <strong>'+ jobName[0]+':'+jobName[1] +'</strong> was deploy success'},
                     closable: false,
-                    type: 'bangTidy'
+                    type: 'heliosmanager'
                 }).show();
             }
             else {
