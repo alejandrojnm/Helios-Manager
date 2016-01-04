@@ -161,3 +161,21 @@ def removeJob(request):
             list = {'status': jobs_result['status'], 'job': request.POST['job']}
 
         return HttpResponse(json.dumps(list), content_type='application/json')
+
+
+@login_required
+def historyJob(request, job):
+    jobs_request = requests.get('http://' + settings.HELIOS_HOST_MASTER + '/history/jobs/'+ job)
+    jobhistory_json = jobs_request.json()
+
+    listhistory_job = []
+    for jobhistory in jobhistory_json['events']:
+        dicc = {"host": jobhistory['host'], "timestamp": jobhistory['timestamp'], "state": jobhistory['status']['state'], 'throttled': jobhistory['status']['throttled'], 'containerid':jobhistory['status']['containerId']  }
+        listhistory_job.append(dicc)
+
+    data = {
+        'listhistoryJob': listhistory_job,
+        'idJob': job,
+    }
+
+    return render_to_response('historyJob.html', data, RequestContext(request))

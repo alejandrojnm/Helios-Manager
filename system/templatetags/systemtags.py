@@ -1,3 +1,5 @@
+import time
+
 from django import template
 from django.utils.safestring import mark_safe
 
@@ -58,6 +60,10 @@ def getversion(value):
     name = value.split(':')
     return name[1]
 
+def timestamp(value):
+    return time.strftime('%m/%d/%Y %H:%M:%S',  time.gmtime(value/1000.))
+
+
 def js(obj):
     """
     Cleaner js from DB for Filter CamanJS
@@ -72,4 +78,5 @@ register.filter('humanDuration', humanduration)
 register.filter('systemName', systemname)
 register.filter('getName', getname)
 register.filter('getVersion', getversion)
+register.filter('timeStamp', timestamp)
 register.filter('js', js)
