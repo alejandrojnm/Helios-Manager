@@ -29,6 +29,14 @@ $('#deployJob').click(function(e){
                     type: 'heliosmanager'
                 }).show();
             }
+            if (result.status == 'JOB_ALREADY_DEPLOYED') {
+                $('#addjob').modal('toggle');
+                $('.top-right').notify({
+                    message: {html: 'Job <strong>'+ jobName[0]+':'+jobName[1] +'</strong> is already deployed in this host'},
+                    closable: false,
+                    type: 'heliosmanager'
+                }).show();
+            }
             else {
                 console.log('Deploy jobs Fails')
             }

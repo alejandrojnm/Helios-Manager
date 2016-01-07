@@ -8,7 +8,7 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Ip</th>
+                    <th>Version</th>
                     <th>Uptime</th>
                     <th>Status</th>
                 </tr>
@@ -17,7 +17,7 @@
                 {% for hosts in listHost %}
                     <tr{% if hosts.status == 'DOWN' %} class="alert-danger"{% endif %}>
                         <td>{{ hosts.agentInfo.name|lower }}</td>
-                        <td>ip</td>
+                        <td>{{ hosts.agentInfo.version }}</td>
                         <td>{{ hosts.agentInfo.uptime|humanDuration }}</td>
                         <td>{{ hosts.status|lower }}
                         <div class="host-status-{{ hosts.status|lower }}"></div>

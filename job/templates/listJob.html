@@ -9,7 +9,7 @@
             <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
                 <a href="#" class="btn btn-primary disabled"><span class="fa fa-download"></span> Download Job</a>
                 <a href="#" class="btn btn-info"><span class="fa fa-upload"></span> Load Job</a>
-                <a href="#" class="btn btn-success"><span class="fa fa-plus"></span> Create Job</a>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#createjob"><span class="fa fa-plus"></span> Create Job</a>
             </div>
             <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Job List</h4>
 
@@ -47,6 +47,7 @@
         </div>
 {#        <div class="col-lg-6"></div>#}
     </div>
+    {% include 'createJob.html' %}
 {% endblock %}
 {% block extrajs %}
     <script src="{{ STATIC_URL }}js/helios.js"></script>
