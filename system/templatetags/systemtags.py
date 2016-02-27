@@ -53,15 +53,30 @@ def systemname(value):
 
 
 def getname(value):
+    """
+
+    :param value:
+    :return:
+    """
     name = value.split(':')
     return name[0]
 
 def getversion(value):
+    """
+
+    :param value:
+    :return:
+    """
     name = value.split(':')
     return name[1]
 
 def timestamp(value):
-    return time.strftime('%m/%d/%Y %H:%M:%S',  time.gmtime(value/1000.))
+    """
+
+    :param value:
+    :return:
+    """
+    return time.strftime('%m/%d/%Y %H:%M:%S',  time.gmtime(value/1e3))
 
 
 def js(obj):

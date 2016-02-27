@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
+    'dealer.contrib.django.context_processor',
 )
 
 ROOT_URLCONF = 'helios.urls'
@@ -96,6 +97,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # URL prefix for static files.
 STATIC_URL = '/static/'
 
-#Helios Version
+# Helios Version
 HELIOS_MANAGER_VERSION = '0.1b'
-HELIOS_HOST_MASTER = '10.10.10.1:5801'
+HELIOS_HOST_MASTER = '201.220.196.170:5801'
+
+#Registry data
+REGISTRY_URL = ''
+REGISTRY_VERSION = ''

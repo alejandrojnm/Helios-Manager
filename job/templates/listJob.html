@@ -2,6 +2,8 @@
 {% load systemtags %}
 {% block extracss %}
     <link href="{{ STATIC_URL }}css/bootstrap-notify.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/chosen.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-wizard.css" rel="stylesheet">
 {% endblock %}
 {% block container %}
     <div class="row">
@@ -9,7 +11,8 @@
             <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
                 <a href="#" class="btn btn-primary disabled"><span class="fa fa-download"></span> Download Job</a>
                 <a href="#" class="btn btn-info"><span class="fa fa-upload"></span> Load Job</a>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#createjob"><span class="fa fa-plus"></span> Create Job</a>
+{#                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#createjob"><span class="fa fa-plus"></span> Create Job</a>#}
+                <a href="#" id="open-wizard" class="btn btn-success"><span class="fa fa-plus"></span> Create Job</a>
             </div>
             <h4 class="page-header-helios margin-top-helios margin-bottom-helios">Job List</h4>
 
@@ -53,4 +56,69 @@
     <script src="{{ STATIC_URL }}js/helios.js"></script>
     <script src="{{ STATIC_URL }}js/jobs.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-notify.js"></script>
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-wizard.min.js"></script>
+    <script !src="">
+        $(document).ready(function () {
+            $('.chosen-select').chosen({width:"100%"});
+
+            $.fn.wizard.logging = true;
+            var wizard = $('#createjob-wizard').wizard({
+                keyboard: false,
+                contentHeight: 400,
+                contentWidth: 700,
+                backdrop: 'static'
+            });
+
+            wizard.on('closed', function () {
+                wizard.reset();
+            });
+
+            wizard.on("reset", function () {
+                wizard.modal.find(':input').val('').removeAttr('disabled');
+                wizard.modal.find('.form-group').removeClass('has-error').removeClass('has-succes');
+                wizard.modal.find('#fqdn').data('is-valid', 0).data('lookup', 0);
+            });
+
+            wizard.on("submit", function (wizard) {
+                var submit = {
+                    "hostname": $("#new-server-fqdn").val()
+                };
+
+                this.log('seralize()');
+                this.log(this.serialize());
+                this.log('serializeArray()');
+                this.log(this.serializeArray());
+
+                setTimeout(function () {
+                    wizard.trigger("success");
+                    wizard.hideButtons();
+                    wizard._submitting = false;
+                    wizard.showSubmitCard("success");
+                    wizard.updateProgressBar(0);
+                }, 2000);
+            });
+
+            wizard.el.find(".wizard-success .im-done").click(function () {
+                wizard.hide();
+                setTimeout(function () {
+                    wizard.reset();
+                }, 250);
+
+            });
+
+            wizard.el.find(".wizard-success .create-another-server").click(function () {
+                wizard.reset();
+            });
+
+            $(".wizard-group-list").click(function () {
+                alert("Disabled for demo.");
+            });
+
+            $('#open-wizard').click(function (e) {
+                e.preventDefault();
+                wizard.show();
+            });
+        });
+    </script>
 {% endblock %}

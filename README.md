@@ -7,6 +7,7 @@ Requirements
 ==============
 * Django == 1.7
 * request == 2.0
+* dealer == 2.0.5
 
 Configuration
 ==============
@@ -21,6 +22,9 @@ inspired, we'd love to talk to you about these (in no particular
 order):
 
 * Users and Groups (You can assing to a user, one o more server to administrate)
+* Crear alertas para el sistema(que cada usurio pueda poner a vigilar un job o host y si falla que se genere una notificaciion en el bell del menu, no importa que helios levante el trabajo la notificacion persitira como que paso)
+* Log System
+* Edit job (que el sistema solo pare los trabajos que esten deploy, borre el job lo cree otraves y haga deploy donde mismo estaban)
 
 Screenshots
 ==============

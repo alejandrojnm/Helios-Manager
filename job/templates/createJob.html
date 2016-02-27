@@ -1,18 +1,73 @@
 <!-- Modal -->
-<div class="modal fade" id="createjob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Create a Job</h4>
-      </div>
-      <div class="modal-body">
-        wizard
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="deployJob" type="button" class="btn btn-primary">Create</button>
-      </div>
+{#<div class="modal fade" id="createjob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#  <div class="modal-dialog">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+{#        <h4 class="modal-title" id="myModalLabel">Create a Job</h4>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        wizard#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+{#        <button id="deployJob" type="button" class="btn btn-primary">Create</button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+<div class="wizard" id="createjob-wizard" data-title="Create Job">
+    <div class="wizard-card" data-cardname="card1">
+        <h3>Images</h3>
+        <select id="images" name="notification" class="wizard-ns-select chosen-select form-control" data-placeholder="Notification schedule">
+						<option value=""></option>
+						<option>ALIS Production</option>
+						<option>ALIS Development &amp; Staging</option>
+						<option>Panopta Development &amp; Staging</option>
+						<option>Jira</option>
+						<option>QSC Enterprise Production</option>
+						<option>QSC Enterprise Development &amp; Staging</option>
+						<option>Panopta Production</option>
+						<option>Panopta Monitoring Nodes</option>
+						<option>Common</option>
+					</select><br><br>
+        <select id="version" name="notification" class="wizard-ns-select chosen-select form-control" data-placeholder="Notification schedule">
+						<option value=""></option>
+						<option>ALIS Production</option>
+						<option>ALIS Development &amp; Staging</option>
+						<option>Panopta Development &amp; Staging</option>
+						<option>Jira</option>
+						<option>QSC Enterprise Production</option>
+						<option>QSC Enterprise Development &amp; Staging</option>
+						<option>Panopta Production</option>
+						<option>Panopta Monitoring Nodes</option>
+						<option>Common</option>
+					</select>
     </div>
-  </div>
+
+    <div class="wizard-card" data-cardname="card2">
+        <h3>Environment</h3>
+        <div>
+            <div class="col-lg-5"><input type="text" class="form-control"/></div>
+            <div class="col-lg-5"><input type="text" class="form-control"/></div>
+            <div class="col-lg-2"><a href="http://" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></a></div>
+        </div>
+        <div style="margin-bottom: 20px">
+            <div class="col-lg-5"><input type="text" class="form-control"/></div>
+            <div class="col-lg-5"><input type="text" class="form-control"/></div>
+            <div class="col-lg-2"><a href="http://" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></a></div>
+        </div>
+    </div>
+    <div class="wizard-card" data-cardname="card3">
+        <h3>Command</h3>
+        Some content
+    </div>
+    <div class="wizard-card" data-cardname="card4">
+        <h3>Volumen</h3>
+        Some content
+    </div>
+    <div class="wizard-card" data-cardname="card5">
+        <h3>Resorces</h3>
+        Some content
+    </div>
 </div>

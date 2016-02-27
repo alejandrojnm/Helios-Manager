@@ -160,6 +160,7 @@ body{
     outline: medium none;
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 }
+
 /**/
 
 /*custom link*/
@@ -254,8 +255,6 @@ a.helios-thumbnail:hover, a.helios-thumbnail:focus, a.helios-thumbnail.active {
 }
 
 /**/
-
-
 
 /*Custom alert notify*/
 .alert-heliosmanager {
